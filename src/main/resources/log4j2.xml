@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="log.dir">logs</Property>
+        <Property name="log.pattern.error">[%d{dd.MM HH:mm:ss.SSS}] [%t] [%-5level] %logger{36} : %msg%n%throwable{full}</Property>
+        <Property name="log.pattern.default">[%d{dd.MM HH:mm:ss.SSS}] [%t] [%-5level] : %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <File name="BankAppAppender" fileName="${log.dir}/bank-app.log" append="false">
+            <PatternLayout pattern="${log.pattern.default}" charset="UTF-8"/>
+        </File>
+
+        <File name="ErrorFileAppender" fileName="${log.dir}/error.log" append="false">
+            <PatternLayout pattern="${log.pattern.error}" charset="UTF-8"/>
+        </File>
+
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log.pattern.default}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="ConsoleAppender" level="INFO"/>
+            <AppenderRef ref="BankAppAppender" level="DEBUG"/>
+            <AppenderRef ref="ErrorFileAppender" level="ERROR"/>
+        </Root>
+    </Loggers>
+</Configuration>
